@@ -2,10 +2,16 @@ import yaml
 from box import Box
 import os
 import pandas as pd
-from config_path import cfg_path
+
 import numpy as np
 from scipy import stats
+# import pyarrow
+import sys
+import os
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from config_path import cfg_path
 
 # ── Column groups ────────────────────────────────────────────────────────────
 PRICE_COLS   = ["^GSPC", "FEZ", "CL=F", "NG=F", "EURUSD=X", "USDCHF=X", "Brent_EIA"]
@@ -138,7 +144,7 @@ class FeatureEngineer:
         frames["vol_spike_flag"] = (
             spx_realized_vol.rolling(TRADING_DAYS)
             .apply(lambda x: pd.Series(x).rank(pct=True).iloc[-1] >= 0.90, raw=False)
-            .astype(int)
+            # .astype(int)
         )
 
         return pd.DataFrame(frames, index=log_returns.index)
@@ -216,7 +222,7 @@ class FeatureEngineer:
         regime_flags = self.compute_baseline_regime_labels(log_returns)
 
         df_features = pd.concat(
-            [log_returns, rolling_vol, rolling_mom, spx_vix_corr, drawdowns, regime_flags],
+            [self.df_raw[PRICE_COLS + [VIX_COL]], log_returns, rolling_vol, rolling_mom, spx_vix_corr, drawdowns, regime_flags],
             axis=1,
         )
 

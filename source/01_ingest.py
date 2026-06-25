@@ -1,6 +1,11 @@
 import yfinance as yf
 import pandas as pd
+import sys
+import os
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from config_path import cfg_path
 
 class AssetDataIngestion:
 
@@ -60,7 +65,7 @@ class AssetDataIngestion:
 def main():
     ingest = AssetDataIngestion("2004-01-05", "2025-12-31")
     df_raw = ingest.get_combined_data()
-    df_raw.to_csv("df_historical_prices.csv")
+    df_raw.to_csv(os.path.join(cfg_path.workspace_root, cfg_path.raw_data))
 
 if __name__ == "__main__":
     main()

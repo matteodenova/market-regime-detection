@@ -1,21 +1,4 @@
 ##
- 1. Load data (dal CSV / parquet)
- 2. Prezzi nel tempo (plot)
-3. Distribuzione ritorni (istogrammi, QQ-plot)
- 4. Correlation matrix (heatmap)
- 5. VIX analysis
-6. Rolling volatility
- 7. Drawdown
- 8. SPX/VIX rolling correlation
-
-Prezzi nel tempo — plot multi-asset con eventi annotati (2008, COVID, 2022 energy crisis)
-Distribuzione dei ritorni — istogrammi + QQ-plot vs normale, conferma visiva del Jarque-Bera
-Correlation matrix — heatmap, magari separata per sotto-periodi (pre/post 2008)
-VIX nel tempo — con soglie e regime flag sovrapposti
-Volatility clustering — plot della rolling vol, visivamente si vede già la persistenza
-Drawdown chart — per SPX e Brent principalmente
-SPX/VIX rolling correlation — per mostrare che cambia nei regimi di stress
-Analisi per sotto-periodi — statistiche separate per 2004-2008, 2009-2019, 2020-2022, 2023+
 
 
 ```python
